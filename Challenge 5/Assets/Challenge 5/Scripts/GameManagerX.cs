@@ -8,10 +8,11 @@ using UnityEngine.UI;
 public class GameManagerX : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI timerText;
     public TextMeshProUGUI gameOverText;
     public GameObject titleScreen;
     public Button restartButton;
-  //  public int timeLeft;
+   
    
 
     public List<GameObject> targetPrefabs;
@@ -34,19 +35,22 @@ public class GameManagerX : MonoBehaviour
         UpdateScore(0);
         titleScreen.SetActive(false);
 
-        //timeLeft = 60;
+        timeLeft = 60;
     }
 
-   // private void update()
-  //  {
-//      if (isGameActive)
- //       { timeLeft -= time.deltatime;
- //           timeText.SetText("Time: " + Mathf.Round(timeLeft));
-  //          if(timeLeft < 0)
-  //          { GameOver();
- //           }
-  //      }
-  //  }
+    private void Update()
+    {
+        if (isGameActive)
+        {
+            timeLeft -= Time.deltaTime;
+            timerText.SetText("Time: " + Mathf.Round(timeLeft));
+            if (timeLeft < 0)
+            {
+                GameOver();
+            }
+        }
+    }
+
 
     // While game is active spawn a random target
     IEnumerator SpawnTarget()
